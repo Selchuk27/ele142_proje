@@ -71,7 +71,7 @@ public:
     rocket(double, vector, vector, vector, double);
     rocket() = default;
     void print();
-    rocket update(double, double);
+    rocket update(vector);
 };
 
 rocket::rocket(double kutleVal, vector konumVal, vector hizVal, vector p_hiz_val, double p_kutle_val)
@@ -92,4 +92,4 @@ class hesapla
 {
     vector kuvvetHesapla();
     vector bileskeKuvvetHesapla();
-}
+};
