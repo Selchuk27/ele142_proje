@@ -56,8 +56,8 @@ cisim cisim::update(vector bileskeKuvvet)
 {
     cisim temp;
     vector ivme = bileskeKuvvet / kutle;
-    temp.hiz =temp.hiz+ ivme * deltaT;
-    temp.konum =temp.konum + hiz * deltaT; 
+    temp.hiz = hiz + ivme * deltaT;
+    temp.konum = konum + hiz * deltaT; 
     return temp;
 }
 
@@ -66,7 +66,7 @@ cisim cisim::update(vector bileskeKuvvet)
 class rocket : public cisim
 {
 public:
-    double p_oran;
+    double p_kutle;
 	vector p_hiz;
     rocket(double, vector, vector, vector, double);
     rocket() = default;
@@ -74,17 +74,22 @@ public:
     rocket update(double, double);
 };
 
-rocket::rocket(double kutleVal, vector konumVal, vector hizVal, vector p_hiz_val, double p_oran_val)
-: cisim(kutleVal, konumVal, hizVal), p_hiz(p_hiz_val), p_oran(p_oran_val) {}
+rocket::rocket(double kutleVal, vector konumVal, vector hizVal, vector p_hiz_val, double p_kutle_val)
+: cisim(kutleVal, konumVal, hizVal), p_hiz(p_hiz_val), p_kutle(p_kutle_val) {}
 
-
-
-int main()
+rocket rocket::update(vector bileskeKuvvet)
 {
-    rocket r1(150, vector(400,0), vector(0,0.2), vector(5,0), 0.1);
- 
- 	std::cout<<r1.k;
+    rocket temp;
+    temp.kutle = kutle - (p_kutle * deltaT);
+    vector ivme = bileskeKuvvet / temp.kutle;
+    temp.hiz = hiz + ivme * deltaT;
+    temp.konum = konum + hiz * deltaT;  
+    return temp;
+}
 
 
-    return 0;
+class hesapla
+{
+    vector kuvvetHesapla();
+    vector bileskeKuvvetHesapla();
 }
